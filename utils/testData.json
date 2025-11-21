@@ -1,0 +1,17 @@
+[{
+    "username" : "niranjana",
+    "password" : "niranjana123"
+},
+{
+    "invalidusername":"invalid",
+    "validpassword":"niranjana123"
+},
+{
+   "validusername":"niranjana",
+   "invalidpassword": "invalid"
+},
+{
+   "invalidusername":"invalid",
+   "invalidpassword": "invalid"
+}
+]
