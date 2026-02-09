@@ -1,9 +1,14 @@
 const {test,expect}=require('@playwright/test')
 const SignUpPage=require('../page-objects/SignUpPage');
-
+const ObjectManager = require('../page-objects/ObjectManager')
+test.describe('Sign Up Test',()=>{
+    test.beforeEach(async({page})=>{
+        await page.goto('https://demoblaze.com/index.html')
+    })
 test('Sign Up Verification',async({page})=>{
-    await page.goto('https://demoblaze.com/index.html')
-    const signup=new SignUpPage(page)
+   // await page.goto('https://demoblaze.com/index.html')
+   const objManager = new ObjectManager(page);
+   const signup = objManager.getSignUpPage();
     await signup.clickSignUpButton()
     await signup.enterUsername()
     await signup.enterPassword()
@@ -14,12 +19,14 @@ test('Sign Up Verification',async({page})=>{
   await dialog.accept();
 });
 });
-test.only('Sign Up and Close',async({page})=>{
-    await page.goto('https://demoblaze.com/index.html')
-    const signup=new SignUpPage(page)
+test('Sign Up and Close',async({page})=>{
+    //await page.goto('https://demoblaze.com/index.html')
+    const objManager = new ObjectManager(page);
+    const signup = objManager.getSignUpPage();
     await signup.clickSignUpButton()
     await signup.enterUsername()
     await signup.enterPassword()
     await signup.closeWindow()
     await expect(page).toHaveURL("https://demoblaze.com/index.html")
+});
 });
