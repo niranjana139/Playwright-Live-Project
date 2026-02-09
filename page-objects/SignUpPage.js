@@ -1,7 +1,7 @@
 class SignUpPage{
     constructor(page){
         this.page=page
-        this.signUpButton=page.locator("//a[text()='Sign up']")
+        this.signUpButton=page.locator('//a[text()="Sign up"]')
         this.usernameField=page.locator('#sign-username')
         this.passwordField=page.locator('#sign-password')
         this.signUpBtn=page.locator("//button[text()='Sign up']")
