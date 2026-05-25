@@ -2,6 +2,7 @@ const {test,expect} = require('@playwright/test')
 const data=JSON.parse(JSON.stringify(require("../utils/testData.json")))
 const LoginPage=require('../page-objects/LoginPage')
 const ObjectManager = require('../page-objects/ObjectManager')
+const ExcelUtility = require('../helpers/ExcelUtility.js')
 test.describe('Login Test',()=>{
     test.beforeEach(async({page})=>{
         await page.goto('https://demoblaze.com/')
@@ -22,8 +23,10 @@ test('Successful Login' ,async ({page})=>{
     await expect(page).toHaveURL(expectedURL)
 });
 test('UnSuccessful Login with invalid username' ,async ({page})=>{
-    const invalidusername=data[1].invalidusername
-    const invalidpassword=data[1].validpassword
+    const filePath = 'C:\\Users\\Netcom\\Desktop\\Niranjana Obsqura\\Playwright_LiveProject\\utils\\LiveProjectData.xlsx';
+    const invalidusername=await ExcelUtility.getStringData(2, 1, 'Login', filePath);
+    const invalidpassword=await ExcelUtility.getStringData(2, 2, 'Login', filePath);
+    
     //await page.goto('https://demoblaze.com/')
     const objManager = new ObjectManager(page);
     const loginPage = objManager.getLoginPage();
