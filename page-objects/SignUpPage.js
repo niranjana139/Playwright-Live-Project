@@ -1,3 +1,4 @@
+import TestDataGenerator from "../helpers/RandomDataGenerator"  
 class SignUpPage{
     constructor(page){
         this.page=page
@@ -6,15 +7,18 @@ class SignUpPage{
         this.passwordField=page.locator('#sign-password')
         this.signUpBtn=page.locator("//button[text()='Sign up']")
         this.close = page.getByRole('button', { name: 'Close' }).nth(0);
+        this.randomDataGenerator = new TestDataGenerator();
     }
     async clickSignUpButton(){
         await this.signUpButton.click()
     }
     async enterUsername(){
-        await this.usernameField.fill('abcde')
+        this.randomUsername = this.randomDataGenerator.generateUsername();
+        await this.usernameField.fill(this.randomUsername)
     }
     async enterPassword(){
-        await this.passwordField.fill('xyze')
+        this.randomPassword = this.randomDataGenerator.generatePassword();
+        await this.passwordField.fill(this.randomPassword)
     }
     async signUp(){
         await this.signUpBtn.click()

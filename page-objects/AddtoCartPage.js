@@ -1,3 +1,4 @@
+import TestDataGenerator from "../helpers/RandomDataGenerator.js"; 
 class AddtoCartPage {
   constructor(page) {
     this.page = page;
@@ -14,8 +15,13 @@ class AddtoCartPage {
     this.year=page.locator("//input[@id='year']")
     this.purchasebtn=page.locator("//button[text()='Purchase']")
     this.monitor=page.locator("//a[text()='Monitors']")
+    this.monitorproduct=page.getByText("Apple monitor 24")
+    this.randomDataGenerator = new TestDataGenerator();
   }
 
+  async select_monitor_product(){
+    await this.monitorproduct.click()
+  }
   async select_phone() {
     await this.phoneProduct.click(); 
   }
@@ -38,27 +44,28 @@ class AddtoCartPage {
   }
 
   async addcustomername(){
-    await this.custname.fill("abc")
+    await this.custname.fill(this.randomDataGenerator.generateRandomFullName())
+   // await this.custname.fill("abc")
   }
 
   async addcountry(){
-    await this.countryname.fill("USA")
+    await this.countryname.fill(this.randomDataGenerator.generateCountry())
   }
 
   async addcity(){
-    await this.cityname.fill("New York")
+    await this.cityname.fill(this.randomDataGenerator.generateCityName())
   }
 
   async addCreditCardData(){
-    await this.creditcard.fill("9867583834")
+    await this.creditcard.fill(this.randomDataGenerator.generateFormattedCardNumber())
   }
 
   async addMonth(){
-    await this.month.fill("05")
+    await this.month.fill(this.randomDataGenerator.generateRandomMonthMM())
   }
 
   async addYear(){
-    await this.year.fill("2027")
+    await this.year.fill(this.randomDataGenerator.generateRandomYear())
   }
   async purchaseProduct(){
     await this.purchasebtn.click()

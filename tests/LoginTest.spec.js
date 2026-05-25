@@ -7,14 +7,16 @@ test.describe('Login Test',()=>{
         await page.goto('https://demoblaze.com/')
     })
 test('Successful Login' ,async ({page})=>{
-    const username=data.username
-    const password=data.password
+    const username=data[0].username
+    const password=data[0].password
     //await page.goto('https://demoblaze.com/')
     const objManager = new ObjectManager(page);
     const loginPage = objManager.getLoginPage();
     await loginPage.clickLogin()
+    await page.waitForTimeout(2000)
     await loginPage.enterUsername(username)
     await loginPage.enterPassword(password)
+    await page.waitForTimeout(2000)
     await loginPage.login()
     const expectedURL="https://demoblaze.com/"
     await expect(page).toHaveURL(expectedURL)

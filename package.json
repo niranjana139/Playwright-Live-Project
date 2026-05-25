@@ -2,13 +2,22 @@
   "name": "playwright_liveproject",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "logintest": "npx playwright test tests/LoginTest.spec.js",
+    "addtocarttest": "npx playwright test tests/AddtoCartTest.spec.js",
+    "hometest": "npx playwright test tests/HomeTest.spec.js",
+    "testscript": "npx playwright test tests",
+    "report": "npx allure generate ./allure-results --clean",
+    "open": "npx allure open ./allure-report",
+    "trace": "powershell -Command \"$file = Get-ChildItem -Path test-results -Recurse -Filter trace.zip | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($file) { npx playwright show-trace \\\"$($file.FullName)\\\" } else { Write-Host 'No trace found' }\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "allure-playwright": "^3.9.0"
   }
 }
